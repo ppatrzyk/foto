@@ -3,13 +3,13 @@
 set -e
 dir=$1
 
-# TODO? do not overwrite ready images?
-if [ -d "./assets" ]; then
-    rm -rf ./assets
+# TODO? do not overwrite ready images? dont delete css once ready
+if [ -d "./static" ]; then
+    rm -rf ./static
 fi
-mkdir ./assets
-mkdir ./assets/thumbs
-mkdir ./assets/images
+mkdir ./static
+mkdir ./static/thumbs
+mkdir ./static/images
 
 exiftool -j \
     -SubSecDateTimeOriginal \
@@ -33,9 +33,9 @@ exiftool -j \
     -Software \
     -Rights \
     -Copyright \
-    $dir/* | jq '[.[] | {(.SourceFile):.}] | add' > exif.json
+    $dir/* | jq '[.[] | {(.SourceFile):.}] | add' > ./data/exif.json
 
-cat exif.json | jq -r 'to_entries[] | "\(.key) \(.value.ImageWidth) \(.value.ImageHeight)"' | \
+cat ./data/exif.json | jq -r 'to_entries[] | "\(.key) \(.value.ImageWidth) \(.value.ImageHeight)"' | \
 while read line
 do
     read -r path orig_width orig_height <<<$(echo $line)
@@ -53,6 +53,6 @@ do
     fi
     thumbs_width=$(jq -n "$web_width/10 | floor")
     thumbs_height=$(jq -n "$web_height/10 | floor")
-    gm convert -size "${web_width}x${web_height}" $path -resize "${web_width}x${web_height}" +profile "*" "./assets/images/$base_name"
-    gm convert -size "${thumbs_width}x${thumbs_height}" $path -resize "${thumbs_width}x${thumbs_height}" +profile "*" "./assets/thumbs/$base_name"
+    gm convert -size "${web_width}x${web_height}" $path -resize "${web_width}x${web_height}" +profile "*" "./static/images/$base_name"
+    gm convert -size "${thumbs_width}x${thumbs_height}" $path -resize "${thumbs_width}x${thumbs_height}" +profile "*" "./static/thumbs/$base_name"
 done

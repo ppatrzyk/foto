@@ -1,0 +1,12 @@
+{{ define "main" }}
+
+<div>
+    {{ range $.Site.Data.exif }}
+        <p>{{ . }}</p>
+        <p>{{ path.Base .SourceFile }}</p>
+        <p><img src="/thumbs/{{ path.Base .SourceFile }}" alt="Photo"></p>
+        <p>-------</p>
+    {{ end }}
+</div>
+
+{{ end }}
