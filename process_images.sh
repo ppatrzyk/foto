@@ -58,5 +58,5 @@ do
     echo "Processing $path"
     base_name=$(basename ${path})
     gm convert -size "${web_width}x${web_height}" $path -resize "${web_width}x${web_height}" +profile "*" "./static/images/$base_name"
-    gm convert "./static/images/$base_name" -resize "10%" +profile "*" "./static/thumbs/$base_name"
+    gm convert "./static/images/$base_name" -resize x200 +profile "*" "./static/thumbs/$base_name"
 done
