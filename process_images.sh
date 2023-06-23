@@ -3,13 +3,15 @@
 set -e
 dir=$1
 
-# TODO? do not overwrite ready images? dont delete css once ready
-if [ -d "./static" ]; then
-    rm -rf ./static
+# TODO? do not overwrite ready images?
+if [ -d "./static/images" ]; then
+    rm -rf ./static/images
 fi
-mkdir ./static
-mkdir ./static/thumbs
 mkdir ./static/images
+if [ -d "./static/thumbs" ]; then
+    rm -rf ./static/thumbs
+fi
+mkdir ./static/thumbs
 
 exiftool -j \
     -SubSecDateTimeOriginal \
@@ -33,26 +35,28 @@ exiftool -j \
     -Software \
     -Rights \
     -Copyright \
-    $dir/* | jq '[.[] | {(.SourceFile):.}] | add' > ./data/exif.json
+    $dir/* | \
+    jq '[
+        .[] |
+        {
+            (.SourceFile):
+            (
+                . +
+                if .ImageWidth > .ImageHeight then
+                {WebWidth: 1000, WebHeight: (.ImageHeight*(1000/.ImageWidth)) | floor}
+                else
+                {WebWidth: (.ImageWidth*(1000/.ImageHeight)) | floor, WebHeight: 1000}
+                end
+            )
+        }
+    ] | add' > ./data/exif.json
 
-cat ./data/exif.json | jq -r 'to_entries[] | "\(.key) \(.value.ImageWidth) \(.value.ImageHeight)"' | \
+cat ./data/exif.json | jq -r 'to_entries[] | "\(.key) \(.value.WebWidth) \(.value.WebHeight)"' | \
 while read line
 do
-    read -r path orig_width orig_height <<<$(echo $line)
+    read -r path web_width web_height <<<$(echo $line)
     echo "Processing $path"
     base_name=$(basename ${path})
-    if (( orig_width > orig_height ))
-    then
-        ratio=$(jq -n 1000/$orig_width)
-        web_width=1000
-        web_height=$(jq -n "$orig_height*$ratio | floor")
-    else
-        ratio=$(jq -n 1000/$orig_height)
-        web_height=1000
-        web_width=$(jq -n "$orig_width*$ratio | floor")
-    fi
-    thumbs_width=$(jq -n "$web_width/10 | floor")
-    thumbs_height=$(jq -n "$web_height/10 | floor")
     gm convert -size "${web_width}x${web_height}" $path -resize "${web_width}x${web_height}" +profile "*" "./static/images/$base_name"
-    gm convert -size "${thumbs_width}x${thumbs_height}" $path -resize "${thumbs_width}x${thumbs_height}" +profile "*" "./static/thumbs/$base_name"
+    gm convert "./static/images/$base_name" -resize "10%" +profile "*" "./static/thumbs/$base_name"
 done
