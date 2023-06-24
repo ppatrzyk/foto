@@ -43,11 +43,10 @@ exiftool -j \
             (
                 . +
                 if .ImageWidth > .ImageHeight then
-                {WebWidth: 1000, WebHeight: (.ImageHeight*(1000/.ImageWidth)) | floor}
+                {WebWidth: 1200, WebHeight: (.ImageHeight*(1200/.ImageWidth)) | floor}
                 else
-                {WebWidth: (.ImageWidth*(1000/.ImageHeight)) | floor, WebHeight: 1000}
-                end +
-                {ThumbWidth: (.ImageWidth*(200/.ImageHeight)) | floor, ThumbHeight: 200}
+                {WebWidth: (.ImageWidth*(1200/.ImageHeight)) | floor, WebHeight: 1200}
+                end
             )
         }
     ] | add' > ./data/exif.json
@@ -58,6 +57,10 @@ do
     read -r path web_width web_height <<<$(echo $line)
     echo "Processing $path"
     base_name=$(basename ${path})
-    gm convert -size "${web_width}x${web_height}" $path -resize "${web_width}x${web_height}" +profile "*" "./static/images/$base_name"
+    gm convert \
+        -size "${web_width}x${web_height}" $path \
+        -resize "${web_width}x${web_height}" +profile "*" \
+        -gravity SouthEast -fill "rgb(204, 204, 204)" -font Ubuntu -pointsize 12 -draw 'text 10,10 "© Piotr Patrzyk"' \
+        "./static/images/$base_name"
     gm convert "./static/images/$base_name" -resize x200 +profile "*" "./static/thumbs/$base_name"
 done
