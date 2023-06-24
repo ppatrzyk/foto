@@ -1,13 +1,16 @@
 {{ define "main" }}
-
-<div class="pswp-gallery pswp-gallery--single-column" id="mygallery">
+<!-- https://github.com/xieranmaya/blog/issues/6 -->
+<div style="display:flex;flex-wrap:wrap;" id="mygallery">
     {{ range sort $.Site.Data.exif "SubSecDateTimeOriginal" "desc"}}
-    <a href="/images/{{ path.Base .SourceFile }}" 
-        data-pswp-width="{{ .WebWidth }}" 
-        data-pswp-height="{{ .WebHeight }}" 
-        target="_blank">
-        <img src="/thumbs/{{ path.Base .SourceFile }}" alt="" />
-    </a>
+    <div style="width:{{ div .ThumbWidth 0.005 .ThumbHeight }}px; flex-grow:{{ div .ThumbWidth 0.005 .ThumbHeight }}">
+        <a href="/images/{{ path.Base .SourceFile }}" 
+            style="padding-bottom:{{ div .ThumbHeight .ThumbWidth 0.01 }}%"
+            data-pswp-width="{{ .WebWidth }}" 
+            data-pswp-height="{{ .WebHeight }}" 
+            target="_blank">
+            <img src="/thumbs/{{ path.Base .SourceFile }}" alt="" />
+        </a>
+    </div>
     {{ end }}
 </div>
 {{ $js := resources.Get "photoswipe-init.js" | resources.Minify }}

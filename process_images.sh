@@ -46,7 +46,8 @@ exiftool -j \
                 {WebWidth: 1000, WebHeight: (.ImageHeight*(1000/.ImageWidth)) | floor}
                 else
                 {WebWidth: (.ImageWidth*(1000/.ImageHeight)) | floor, WebHeight: 1000}
-                end
+                end +
+                {ThumbWidth: (.ImageWidth*(200/.ImageHeight)) | floor, ThumbHeight: 200}
             )
         }
     ] | add' > ./data/exif.json
