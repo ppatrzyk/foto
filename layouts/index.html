@@ -1,16 +1,13 @@
 {{ define "main" }}
-<!-- https://github.com/xieranmaya/blog/issues/6 -->
-<div style="display:flex;flex-wrap:wrap;" id="mygallery">
+<div id="mygallery" class="image-grid">
     {{ range sort $.Site.Data.exif "SubSecDateTimeOriginal" "desc"}}
-    <div style="width:{{ div .ThumbWidth 0.005 .ThumbHeight }}px; flex-grow:{{ div .ThumbWidth 0.005 .ThumbHeight }}">
-        <a href="/images/{{ path.Base .SourceFile }}" 
-            style="padding-bottom:{{ div .ThumbHeight .ThumbWidth 0.01 }}%"
-            data-pswp-width="{{ .WebWidth }}" 
-            data-pswp-height="{{ .WebHeight }}" 
-            target="_blank">
-            <img src="/thumbs/{{ path.Base .SourceFile }}" alt="" />
-        </a>
-    </div>
+    <a href="/images/{{ path.Base .SourceFile }}" 
+        style="--width: {{ .WebWidth }}; --height: {{ .WebHeight }};"
+        data-pswp-width="{{ .WebWidth }}" 
+        data-pswp-height="{{ .WebHeight }}" 
+        target="_blank">
+        <img src="/thumbs/{{ path.Base .SourceFile }}" alt="" />
+    </a>
     {{ end }}
 </div>
 {{ $js := resources.Get "photoswipe-init.js" | resources.Minify }}
