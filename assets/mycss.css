@@ -1,11 +1,16 @@
 body {
-    background-color: white;
+    background-color: rgb(250, 250, 250);
+    color: rgb(26, 26, 26);
+    font-family: Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
 }
 @media only screen and (min-width : 1024px) {
     .main {
         margin-left: 100px;
         margin-right: 100px;
     }
+}
+.text {
+    text-align: center;
 }
 
 /* code adapted from https://ehtmlu.com/blog/justified-image-grid-only-with-css-html/ */
@@ -35,6 +40,5 @@ body {
 .image-grid::after {
     content: " ";
     flex-grow: 1000000000;
-    background: white;
 }
 /* END */

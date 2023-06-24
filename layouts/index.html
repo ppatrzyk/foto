@@ -1,4 +1,5 @@
 {{ define "main" }}
+<h1 class="text">Piotr's Photo Gallery</h1>
 <div id="mygallery" class="image-grid">
     {{ range sort $.Site.Data.exif "SubSecDateTimeOriginal" "desc"}}
     <a href="/images/{{ path.Base .SourceFile }}" 
@@ -7,7 +8,16 @@
         data-pswp-height="{{ .WebHeight }}" 
         target="_blank">
         <img src="/thumbs/{{ path.Base .SourceFile }}" alt="" />
-    </a>
+        <div class="pswp-caption-content">
+            <p>{{ substr .SubSecDateTimeOriginal 0 10 }}</p>
+            <p>{{ .Model }}</p>
+            <p>{{ .LensID }}</p>
+            <p>{{ .FocalLength }}</p>
+            <p>F {{ .FNumber }}</p>
+            <p>Shutter {{ .ExposureTime }}</p>
+            <p>ISO {{ .ISO }}</p>
+        </div>
+    </a>    
     {{ end }}
 </div>
 {{ $js := resources.Get "photoswipe-init.js" | resources.Minify }}

@@ -2,5 +2,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ .Site.Title }}</title>
 <link rel="stylesheet" href="/photoswipe-v5.3.7/dist/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe-v5.3.7/photoswipe-dynamic-caption-plugin.css">
 {{ $css := resources.Get "mycss.css" | resources.Minify }}
 <link rel="stylesheet" href="{{ $css.Permalink }}">
