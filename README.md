@@ -1,13 +1,12 @@
 # foto
 
-Code for generationg my photo gallery
+Code for generating my photo gallery
 
 required utilities:
 - exiftool
 - GraphicsMagick
 - jq
 - hugo
-
 
 ```
 ./process_images.sh <path_to_original_jpegs>
