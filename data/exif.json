@@ -2066,5 +2066,31 @@
     "Copyright": "Piotr Patrzyk",
     "WebWidth": 801,
     "WebHeight": 1200
+  },
+  "/home/piotr/Documents/portfolio/20231210101225.jpg": {
+    "SourceFile": "/home/piotr/Documents/portfolio/20231210101225.jpg",
+    "SubSecDateTimeOriginal": "2023:12:10 10:12:25.120",
+    "Make": "NIKON CORPORATION",
+    "Model": "NIKON D750",
+    "LensID": "Voigtlander Nokton 58mm F1.4 SLII",
+    "LensSpec": "58mm f/1.4 AF",
+    "LensType": "AF",
+    "Lens": "58mm f/1.4",
+    "MaxApertureValue": 1.4,
+    "FocalLength": "58.0 mm",
+    "FNumber": 1.4,
+    "ExposureProgram": "Manual",
+    "MeteringMode": "Center-weighted average",
+    "ExposureTime": "1/2500",
+    "ShutterSpeed": "1/2500",
+    "ISO": 125,
+    "Flash": "Off, Did not fire",
+    "ImageWidth": 6032,
+    "ImageHeight": 4032,
+    "Software": "darktable 4.4.2",
+    "Rights": "Piotr Patrzyk",
+    "Copyright": "Piotr Patrzyk",
+    "WebWidth": 1200,
+    "WebHeight": 802
   }
 }
