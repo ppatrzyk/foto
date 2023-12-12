@@ -2092,5 +2092,31 @@
     "Copyright": "Piotr Patrzyk",
     "WebWidth": 1200,
     "WebHeight": 802
+  },
+  "/home/piotr/Documents/portfolio/20231211120741.jpg": {
+    "SourceFile": "/home/piotr/Documents/portfolio/20231211120741.jpg",
+    "SubSecDateTimeOriginal": "2023:12:11 12:07:41.060",
+    "Make": "NIKON CORPORATION",
+    "Model": "NIKON D750",
+    "LensID": "Tokina AT-X 304 AF (AF 300mm f/4.0)",
+    "LensSpec": "300mm f/4 D",
+    "LensType": "D",
+    "Lens": "300mm f/4",
+    "MaxApertureValue": 4,
+    "FocalLength": "300.0 mm",
+    "FNumber": 4,
+    "ExposureProgram": "Manual",
+    "MeteringMode": "Center-weighted average",
+    "ExposureTime": "1/1250",
+    "ShutterSpeed": "1/1250",
+    "ISO": 100,
+    "Flash": "Off, Did not fire",
+    "ImageWidth": 5993,
+    "ImageHeight": 3995,
+    "Software": "darktable 4.4.2",
+    "Rights": "Piotr Patrzyk",
+    "Copyright": "Piotr Patrzyk",
+    "WebWidth": 1200,
+    "WebHeight": 799
   }
 }
