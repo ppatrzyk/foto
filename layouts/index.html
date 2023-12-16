@@ -11,7 +11,11 @@
         <div class="pswp-caption-content">
             <p>{{ substr .SubSecDateTimeOriginal 0 10 }}</p>
             <p>{{ .Model }}</p>
-            <p>{{ .LensID }}</p>
+            {{ if (or (strings.Contains .LensID "Unknown") (strings.Contains .LensID "Manual Lens No CPU")) }}
+                <p>{{ .Lens }}</p>
+            {{ else }}
+                <p>{{ .LensID }}</p>
+            {{ end }}
             <p>{{ .FocalLength }}</p>
             <p>F {{ .FNumber }}</p>
             <p>Shutter {{ .ExposureTime }}</p>
