@@ -60,7 +60,7 @@ do
     gm convert \
         -size "${web_width}x${web_height}" $path \
         -resize "${web_width}x${web_height}" +profile "*" \
-        -gravity SouthEast -fill "rgb(204, 204, 204)" -font Ubuntu -pointsize 12 -draw 'text 10,10 "© Piotr Patrzyk"' \
+        -gravity SouthEast -fill "rgb(204, 204, 204)" -font "/usr/share/fonts/truetype/ubuntu/Ubuntu-M.ttf" -pointsize 12 -draw 'text 10,10 "© Piotr Patrzyk"' \
         "./static/images/$base_name"
     gm convert "./static/images/$base_name" -resize x200 +profile "*" "./static/thumbs/$base_name"
 done
